@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://AnimationPlayer.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/tile000.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 88.5, 50.5 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemies:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "flying"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Enemies:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -252, 150 ), Vector2( -524, -141 ), Vector2( -784, 164 ), Vector2( -1047, -153 ), Vector2( -1273, 158 ) ]
+}
+
+[node name="Aerial_Enemies" type="Node2D"]
+
+[node name="Enemies" type="KinematicBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies"]
+position = Vector2( 9.5, -7.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Enemies"]
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/flying = SubResource( 3 )
+script = ExtResource( 1 )

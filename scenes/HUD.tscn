@@ -1,0 +1,213 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Fonts/8-bit-pusab.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Codes/HUD.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Armour.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Upgrade jumps.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/pixil-frame-0 (1).png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_size = 3
+outline_color = Color( 0.364706, 0.333333, 0.333333, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+outline_size = 3
+outline_color = Color( 0.364706, 0.333333, 0.333333, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 53
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+outline_size = 4
+outline_color = Color( 0.341176, 0.341176, 0.341176, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=10]
+outline_size = 1
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+outline_size = 1
+outline_color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 20
+outline_size = 1
+outline_color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 20
+outline_size = 1
+outline_color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
+font_data = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="gameover" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -307.0
+margin_top = 26.0
+margin_right = 280.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 1 )
+text = "DINO DEAD"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Replay" type="Button" parent="."]
+anchor_left = 0.492
+anchor_top = 0.5
+anchor_right = 0.492
+anchor_bottom = 0.5
+margin_left = -72.808
+margin_top = -27.0
+margin_right = 65.192
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 2 )
+text = "Replay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+anchor_left = 0.494
+anchor_top = 0.691
+anchor_right = 0.494
+anchor_bottom = 0.691
+margin_left = -72.856
+margin_top = -29.6
+margin_right = 65.144
+margin_bottom = 25.4
+custom_fonts/font = SubResource( 3 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title_text" type="Label" parent="."]
+margin_left = 263.0
+margin_top = 38.0
+margin_right = 753.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 4 )
+text = "Dino Run!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="."]
+anchor_right = 0.006
+anchor_bottom = 0.017
+margin_left = 391.0
+margin_top = 254.0
+margin_right = 615.856
+margin_bottom = 342.8
+custom_fonts/font = SubResource( 5 )
+text = "START"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Power Ups Bar" type="Label" parent="."]
+margin_left = 11.0
+margin_top = 26.0
+margin_right = 87.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 10 )
+text = "Power Ups :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Armour" type="Sprite" parent="Power Ups Bar"]
+position = Vector2( 194, 16 )
+scale = Vector2( 0.55, 0.55 )
+texture = ExtResource( 3 )
+
+[node name="Jump_logo" type="Sprite" parent="Power Ups Bar"]
+position = Vector2( 241, 22 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 4 )
+
+[node name="Score_label" type="Label" parent="."]
+margin_left = 6.0
+margin_top = 65.0
+margin_right = 122.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 6 )
+text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 129.0
+margin_top = 68.0
+margin_right = 225.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 7 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Final_Score" type="Label" parent="."]
+margin_left = 320.0
+margin_top = 174.0
+margin_right = 570.0
+margin_bottom = 211.0
+custom_fonts/font = SubResource( 8 )
+text = "FINAL SCORE:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Final_Score_Label" type="Label" parent="Final_Score"]
+margin_left = 273.0
+margin_top = 2.0
+margin_right = 427.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 9 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tutorial" type="Sprite" parent="."]
+position = Vector2( 816.25, 306.5 )
+scale = Vector2( 3.135, 2.87 )
+texture = ExtResource( 5 )
+
+[connection signal="pressed" from="Replay" to="." method="_on_Replay_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]

@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/Dino.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Test.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Codes/main.gd" type="Script" id=4]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/JumpUpgrade.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ArmorUp.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 609, 59 )
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1015, 362, 0, 0, 0, 0, 1016, 427 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1023, 430, 0, 0, 0, 0, 1024, 477 )
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1027, 19, 0, 0, 0, 0, 1027, 116 )
+}
+
+[node name="main" type="Node"]
+script = ExtResource( 4 )
+
+[node name="JumpUpgrade" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1203, 277 )
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 5 )]
+
+[node name="Node2D" parent="." instance=ExtResource( 3 )]
+
+[node name="Dino" parent="." groups=["Main"] instance=ExtResource( 1 )]
+position = Vector2( 91, 459 )
+scale = Vector2( 1.5, 1.5 )
+speed = 200
+jump_strength = 900.0
+double_jump_strenth = 700.0
+
+[node name="ArmorUp" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1205, 340 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 507, 538 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+visible = false
+position = Vector2( 519, 580.5 )
+scale = Vector2( 16.0938, 0.671875 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Platform Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="PlatformPath" type="Path2D" parent="."]
+position = Vector2( 100, -200 )
+curve = SubResource( 2 )
+
+[node name="PlatformPathFollow" type="PathFollow2D" parent="PlatformPath"]
+position = Vector2( 1015, 362 )
+rotation = 1.55542
+
+[node name="Mob Timer" type="Timer" parent="."]
+wait_time = 8.0
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 3 )
+
+[node name="MobPathFollow" type="PathFollow2D" parent="MobPath"]
+position = Vector2( 1023, 430 )
+rotation = 1.54951
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="FlyingPath" type="Path2D" parent="."]
+curve = SubResource( 4 )
+
+[node name="FlyingPathFollow" type="PathFollow2D" parent="FlyingPath"]
+position = Vector2( 1027, 19 )
+rotation = 1.5708
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[connection signal="Armor" from="." to="ArmorUp" method="_on_main_Armor"]
+[connection signal="more_jumps" from="." to="JumpUpgrade" method="_on_main_more_jumps"]
+[connection signal="Upgrade_jump" from="JumpUpgrade" to="CanvasLayer" method="_on_JumpUpgrade_Upgrade_jump"]
+[connection signal="Upgrade_jump" from="JumpUpgrade" to="Dino" method="_on_JumpUpgrade_Upgrade_jump"]
+[connection signal="Quit" from="CanvasLayer" to="Dino" method="_on_CanvasLayer_Quit"]
+[connection signal="restart" from="CanvasLayer" to="JumpUpgrade" method="_on_CanvasLayer_restart"]
+[connection signal="restart" from="CanvasLayer" to="Node2D" method="_on_CanvasLayer_restart"]
+[connection signal="restart" from="CanvasLayer" to="Dino" method="_on_CanvasLayer_restart"]
+[connection signal="timer_Start" from="CanvasLayer" to="." method="_on_CanvasLayer_timer_Start"]
+[connection signal="timer_stop" from="CanvasLayer" to="." method="_on_CanvasLayer_timer_stop"]
+[connection signal="death" from="Dino" to="CanvasLayer" method="_on_Dino_death"]
+[connection signal="death" from="Dino" to="Node2D" method="_on_Dino_death"]
+[connection signal="turnArmorOff" from="Dino" to="CanvasLayer" method="_on_Dino_turnArmorOff"]
+[connection signal="ArmorDoThing" from="ArmorUp" to="CanvasLayer" method="_on_ArmorUp_ArmorDoThing"]
+[connection signal="ArmorDoThing" from="ArmorUp" to="Dino" method="_on_ArmorUp_ArmorDoThing"]
+[connection signal="timeout" from="Platform Timer" to="." method="_on_Platform_Timer_timeout"]
+[connection signal="timeout" from="Mob Timer" to="." method="_on_Mob_Timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
