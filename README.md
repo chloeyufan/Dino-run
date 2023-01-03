@@ -1,1 +1,2 @@
 # Dino-run
+actual game at https://failstaff1129.itch.io/dino-run
